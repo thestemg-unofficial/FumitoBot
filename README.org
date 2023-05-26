@@ -13,4 +13,4 @@ the name was picked because i liked the meanings of the individual kanji
  * 斗 (to) signifies the "Big Dipper" constellation,
    its commonly used in Japanese names and is associated with guidance and leadership
    i.e. someone who shines brightly and leads others.
-   this fits along the lines of a discord bot which purpose is to assist users
+   this fits along the lines of a discord bot which purpose is to assist user
