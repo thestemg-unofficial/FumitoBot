@@ -1,5 +1,6 @@
 *
-!.flake.lock
+!packages.lock.json
+!flake.lock
 !.gitignore
 !README.org
 !flake.nix
