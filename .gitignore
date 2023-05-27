@@ -4,4 +4,6 @@
 !.gitignore
 !README.org
 !flake.nix
+!dotnet-tool.nix
+!.envrc
 !fumitoBot.fsproj
