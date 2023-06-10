@@ -1,4 +1,5 @@
 *
+!Packages/*.fs
 !packages.lock.json
 !flake.lock
 !.gitignore

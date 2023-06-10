@@ -7,13 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Program.fs" />
+   
+     <Compile Include="Program/EventTypes.fs" />
+      <Compile Include="Program/WebsocketClient.fs" />
+      <Compile Include="Program/Utils.fs" />
+      <Compile Include="Program/Program.fs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="3.10.0" />
-  </ItemGroup>
-   
+     
 
 
 </Project>
