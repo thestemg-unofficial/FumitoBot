@@ -8,13 +8,21 @@ module Client =
     type MsgResponse = { Message: string; EOM : bool }
     type WSClient (url) =
         let ws = new ClientWebSocket()
-        let onResponse = new Event<string>()
-  
+        
+        
+        let timeout (x : int) =
+             async { 
+                System.Threading.Thread.Sleep x
+                failwith "Timeout"
+             } |> Async.Start
+
+             
+        
         let connect() =
             match ws.State with
                 | WebSocketState.Open ->  printfn "Tried to connect a websocket client that was already open!"
                 | _ -> ws.ConnectAsync(Uri(url), CancellationToken.None) |> (Async.RunSynchronously << Async.AwaitTask)
-            Some(ws.State)
+            
 
         let receive() = 
             let buffer = ArraySegment(Array.zeroCreate<byte> 1024)
@@ -27,30 +35,30 @@ module Client =
             let msg = ArraySegment(bytes, 0, bytes.Length)
             ws.SendAsync(msg, WebSocketMessageType.Text, true, CancellationToken.None)  |> (Async.RunSynchronously << Async.AwaitTask)
 
-        let timeout (x : int) =
-             async { 
-                System.Threading.Thread.Sleep x
-                failwith "Timeout"
-             } |> Async.Start
-        
         let startReceive() =
             if not (ws.State = WebSocketState.Open) then
-                connect() |> ignore
+                connect() 
 
             let rec readMsg oldMsg =
                 let response = receive().Value
                 let msg = oldMsg + response.Message
                 if response.EOM then msg
                 else readMsg msg
-                
-
+            
             timeout 1000
 
             let msg = readMsg ""
-            onResponse.Trigger(msg)
+            msg
+
+        let sendRequest jsonMsg =
+            if not (ws.State = WebSocketState.Open) then
+                connect() 
+            send jsonMsg
+            startReceive()
           
-        member this.WS = ws
-        
-        member this.Send bytes = send bytes
-        member this.OnResponse = onResponse.Publish
+
+               
+        //member this.WS = ws
+      
+        member this.SendRequest request = sendRequest request
         member this.StartReceive = startReceive
