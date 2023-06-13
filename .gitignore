@@ -1,6 +1,6 @@
 *
-!Program
-!Program/*.fs
+!src
+!src/*.fs
 !packages.lock.json
 !flake.lock
 !.gitignore
