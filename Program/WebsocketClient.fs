@@ -58,7 +58,7 @@ module Client =
           
 
                
-        //member this.WS = ws
-      
+    
+        member this.CloseStatus = (ws.CloseStatus, ws.CloseStatusDescription)
         member this.SendRequest request = sendRequest request
         member this.StartReceive = startReceive

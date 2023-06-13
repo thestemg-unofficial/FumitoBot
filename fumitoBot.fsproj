@@ -9,6 +9,7 @@
   <ItemGroup>
    
      <Compile Include="Program/EventTypes.fs" />
+    
       <Compile Include="Program/WebsocketClient.fs" />
       <Compile Include="Program/Utils.fs" />
       <Compile Include="Program/Program.fs" />
