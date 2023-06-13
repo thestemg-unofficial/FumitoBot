@@ -86,17 +86,19 @@ type User = {
     [<field: DataMember(Name = "id")>]
     id: string
     [<field: DataMember(Name = "global_name")>]
-    global_name: string option
+    global_name: string
     [<field: DataMember(Name = "flags")>]
     flags: int
     [<field: DataMember(Name = "email")>]
-    email: string option
+    email: string
     [<field: DataMember(Name = "discriminator")>]
     discriminator: string
     [<field: DataMember(Name = "bot")>]
     bot: bool
     [<field: DataMember(Name = "avatar")>]
-    avatar: string option }
+    avatar: string 
+
+}
 
 [<DataContract>]
 type Guild = {
