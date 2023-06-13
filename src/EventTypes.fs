@@ -122,8 +122,8 @@ type ReadyData = {
    v: int
    [<field: DataMember(Name = "user_settings")>]
    user_settings: obj
-   [<field: DataMember(Name = "user")>]
-   user: User
+  // [<field: DataMember(Name = "user")>]
+   //user: User
    [<field: DataMember(Name = "shard")>]
    shard: int []
    [<field: DataMember(Name = "session_type")>]
