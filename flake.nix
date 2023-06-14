@@ -31,6 +31,9 @@
           projectFile = "${pname}.fsproj";
           packNupkg = true;
 
+          dotnet-sdk = dotnetPkg;
+          dotnet-runtime = pkgs.dotnetCorePackages.runtime_7_0;
+
           nugetDeps = nuget-packageslock2nix.lib {
             system = system;
             lockfiles = [./packages.lock.json];
