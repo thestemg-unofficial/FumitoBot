@@ -1,6 +1,5 @@
 open System
 open System.IO
-open System.Net.Http
 open Utils.Json
 open Discord.EventTypes
 open Websockets.Client
