@@ -1,38 +1,33 @@
-open System
 open System.IO
-open System.Net.Http
-open Utils.Json
-open Discord.EventTypes
-open Websockets.Client
+open System.Threading
+open Discord.Gateway
 
-let token = File.ReadAllText "Token.dat"
 
-let identityData: IdentifyData = {
-   token = token
-   properties = {os = "linux"; browser = ""; device = ""}
-   compress = Some false
-   large_threshold = None
-   shard = [|0 ; 1|]
-   presence = None
-   intents = 3665
-   
-}
-let identity : IdentifyEvent = {
-   op = 2
-   d = identityData
-   s = Nullable()
-   t = ""
-} 
 
 
 
 [<EntryPoint>]
 let main _ =
-    let identity = serialize<IdentifyEvent> identity
-  
-    let ws = WSClient "wss://gateway.discord.gg/?v=10&encoding=json"
-       
-    let heartbeat = ws.StartReceive() |> deserialize<HeartbeatEvent>
-    let readyEvent = identity |> ws.SendRequest |> deserialize<ReadyEvent>
+    let identity =
+        Identity
+        |> withToken (File.ReadAllText "Token.dat")
+        |> withIntents 3665
     
+    let gateway = Gateway ()
+
+    gateway.MsgHandler (fun msg -> printfn "Message: %A\n" (EventParser.parseEvent msg))
+    gateway.Start |> ignore
+    gateway.Identify identity
+    
+   
+
+    Thread.Sleep 1000
+
+    
+
+    
+   
+   
+       
+
     0
