@@ -9,10 +9,14 @@
   <ItemGroup>
       <Compile Include="src/EventTypes.fs" />
       <Compile Include="src/WebsocketClient.fs" />
+      <Compile Include="src/Gateway.fs" />
+     
       <Compile Include="src/Utils.fs" />
       <Compile Include="src/Program.fs" />
   </ItemGroup>
-
+  <ItemGroup>
+<PackageReference Include="FSharpPlus" Version="1.4.1" />
+  </ItemGroup>
      
 
 
