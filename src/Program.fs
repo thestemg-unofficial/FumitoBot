@@ -1,6 +1,12 @@
 open System.IO
+<<<<<<< HEAD
 open System.Threading
 open Discord.Gateway
+=======
+open Utils.Json
+open Discord.EventTypes
+open Websockets.Client
+>>>>>>> origin/master
 
 
 
