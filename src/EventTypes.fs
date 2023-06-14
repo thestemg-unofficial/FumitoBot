@@ -3,7 +3,6 @@ open System
 open System.Runtime.Serialization
 open System.Runtime.Serialization.Json
 
-
 [<DataContract>]
 type GatewayEvent<'T> = {
     [<field: DataMember(Name = "op")>]
@@ -23,6 +22,14 @@ type HeartbeatData = {
  }
 [<DataContract>]
 type HeartbeatEvent = GatewayEvent<HeartbeatData>
+
+[<DataContract>]
+type Heartbeat = {
+    [<field: DataMember(Name = "op")>]
+    op: int
+    [<field: DataMember(Name = "d")>]
+    d: int option
+}
 
 [<DataContract>]
 type GatewayProperties = {
@@ -207,16 +214,16 @@ type GuildMember = {
     user: User
     [<field: DataMember(Name = "roles")>]
     roles: string []
-   // [<field: DataMember(Name = "premium_since")>]
-    //premium_since: Nullable<DateTimeOffset>
+    [<field: DataMember(Name = "premium_since")>]
+    premium_since: string
     [<field: DataMember(Name = "pending")>]
     pending: bool
     [<field: DataMember(Name = "nick")>]
     nick: string option
     [<field: DataMember(Name = "mute")>]
     mute: bool
-    //[<field: DataMember(Name = "joined_at")>]
-   // joined_at: DateTimeOffset
+    [<field: DataMember(Name = "joined_at")>]
+    joined_at: string
     [<field: DataMember(Name = "flags")>]
     flags: int
     [<field: DataMember(Name = "deaf")>]
@@ -277,8 +284,8 @@ type GuildData = {
     embedded_activities: obj []
     [<field: DataMember(Name = "application_command_counts")>]
     application_command_counts: obj
-   // [<field: DataMember(Name = "joined_at")>]
-  // joined_at: DateTimeOffset
+    [<field: DataMember(Name = "joined_at")>]
+    joined_at: string
     [<field: DataMember(Name = "vanity_url_code")>]
     vanity_url_code: string option
     [<field: DataMember(Name = "default_message_notifications")>]
