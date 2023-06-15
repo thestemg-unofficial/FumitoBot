@@ -3,6 +3,7 @@ open Discord.EventTypes
 open Utils.Json
 open Websockets.Client
 open System
+open Newtonsoft.Json
 
 module EventParser =
     type ParsedEvent =
@@ -12,45 +13,16 @@ module EventParser =
         | UnknownEvent of string * string
 
     let parseEvent (msg : string) : ParsedEvent =
-        let aMsg = deserialize<GatewayEvent<obj>> msg
+        let aMsg = JsonConvert.DeserializeObject<GatewayEvent<obj>> msg
    
         match aMsg.op, aMsg.t with
-            | 10, _ -> HeartbeatEvent <| deserialize<HeartbeatEvent> msg
-            | 0 , "READY" -> ReadyEvent <| deserialize<ReadyEvent> msg
-            | 0, "GUILD_CREATE" -> GuildCreateEvent <| deserialize<GuildCreateEvent> msg
+            | 10, _ -> HeartbeatEvent <| JsonConvert.DeserializeObject<HeartbeatEvent> msg
+            | 0 , "READY" -> ReadyEvent <| JsonConvert.DeserializeObject<ReadyEvent> msg
+            | 0, "GUILD_CREATE" -> GuildCreateEvent <| JsonConvert.DeserializeObject<GuildCreateEvent> msg
             | op, t -> UnknownEvent (string op, t)
 
 
 
-let Identity : IdentifyData = {
-      token = ""
-      properties = {os = ""; browser = ""; device = ""}
-      compress = Some false
-      large_threshold = None
-      shard = [|0 ; 1|]
-      presence = None
-      intents = 0 }
-
-let withToken token identifyData =
-    { identifyData with token = token }
-
-let withProperties properties identifyData =
-    { identifyData with properties = properties }
-
-let withCompress compress identifyData =
-    { identifyData with compress = Some compress }
-
-let withLargeThreshold largeThreshold identifyData =
-    { identifyData with large_threshold = Some largeThreshold }
-
-//let withShard shard identifyData =
-//    { identifyData with shard = shard }
-
-let withPresence presence identifyData =
-    { identifyData with presence = Some presence }
-
-let withIntents intents identifyData =
-    { identifyData with intents = intents }
 
 type Gateway(identity) =
     let ws = WSClient "wss://gateway.discord.gg/?v=10&encoding=json"
@@ -67,7 +39,7 @@ type Gateway(identity) =
     
     member this.Identify identity =
         {op = 2; d = identity; s = Nullable(); t = ""}
-        |> serialize<IdentifyEvent>
+        |> JsonConvert.SerializeObject
         |> ws.SendMessageAsync
         |> Async.AwaitTask
         |> ignore

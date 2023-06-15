@@ -7,20 +7,30 @@ open Discord.HTTP.Client
 
 open Utils.Json
 open Websockets.Client
+open Newtonsoft.Json
+open System
+
+
+let token = File.ReadAllText "Token.dat"
+let identity = 
+    { token = token
+      properties = { os = ""; browser = ""; device = "" }
+      compress = None
+      large_threshold = None
+      shard = [| 1; 2 |]
+      presence = None
+      intents = 3665 }
 
 
 [<EntryPoint>]
 let main _ =
-    let token = File.ReadAllText "Token.dat"
-    let identity =
-        Identity |> withToken token |> withIntents 3665
 
     let gateway = Gateway()
 
+
     gateway.MsgHandler(fun msg -> printfn "Message: %A\n" (EventParser.parseEvent msg))
     gateway.Start |> ignore
-    gateway.Identify identity
-
+    let i = gateway.Identify identity
     task {
         let httpClient = new HttpClient ("https://discord.com/api/v10", token)
         let! data = httpClient.GetChannel("951452676665794603").GetMessages()

@@ -20,11 +20,7 @@ module Client =
 
         let onMsgReceived = new Event<string>()
         let onConnect = new Event<WebSocket>()
-
      
-                
-            
-        
         let connect() =
             match ws.State with
                 | WebSocketState.Open ->
@@ -63,7 +59,6 @@ module Client =
             use cts = new CancellationTokenSource(timeoutDuration)
             let timeoutTask : Task = Task.Delay(timeoutDuration, cts.Token)
 
-
             let rec readMsg (acc : StringBuilder) =
                 receiveAsync() >>= fun resp ->
                     acc.Append(resp.Message) |> ignore
@@ -71,7 +66,6 @@ module Client =
                     match resp.EOM with
                     | true ->
                         onMsgReceived.Trigger msg
-                      
                         Task.FromResult msg
                     | false -> readMsg acc
                     
