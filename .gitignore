@@ -1,6 +1,8 @@
 *
 !src
 !src/*.fs
+!src/HTTP
+!src/HTTP/*.fs
 !packages.lock.json
 !flake.lock
 !.gitignore

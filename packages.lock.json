@@ -16,6 +16,15 @@
         "dependencies": {
           "FSharp.Core": "6.0.6"
         }
+      },
+      "FsHttp": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "7OLjrJGMFQuxVIpoOi/5j6I8iGetAx85NxRuNMfAFQg9arrI9laiKvQvBFPFIJQqeKS7wD07Gra5Sgh9orOmUw==",
+        "dependencies": {
+          "FSharp.Core": "5.0.0"
+        }
       }
     }
   }
