@@ -1,5 +1,8 @@
 module Discord.Gateway
-open Discord.EventTypes
+
+open Discord.Types.Gateway
+open Discord.Types.Event
+
 open Utils.Json
 open Websockets.Client
 open System

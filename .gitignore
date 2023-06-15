@@ -2,6 +2,8 @@
 !src
 !src/*.fs
 !src/HTTP
+!src/Types
+!src/Types/*.fs
 !src/HTTP/*.fs
 !packages.lock.json
 !flake.lock

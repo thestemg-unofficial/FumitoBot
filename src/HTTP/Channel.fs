@@ -1,6 +1,6 @@
 namespace Discord.HTTP.Channel
 
-open Discord.EventTypes
+open Discord.Types.Channel
 open Utils
 
 open FsHttp
