@@ -1,4 +1,6 @@
 *
+!.config/
+!.config/*
 !src
 !src/*.fs
 !src/HTTP
