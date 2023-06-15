@@ -3,7 +3,7 @@ open System.Threading
 
 open Discord.Gateway
 open Discord.EventTypes
-open Discord.HTTP.Api
+open Discord.HTTP.Client
 
 open Utils.Json
 open Websockets.Client

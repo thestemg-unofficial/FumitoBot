@@ -7,7 +7,7 @@ open FsHttp
 
 open FSharpPlus
 
-type ApiChannel(uri, token, chan_id) =
+type ClientChannel(uri, token, chan_id) =
     let url = $"{uri}/channels/{chan_id}/"
 
     let get route =

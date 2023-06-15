@@ -12,7 +12,7 @@
       <Compile Include="src/WebsocketClient.fs" />
       <Compile Include="src/Gateway.fs" />
       <Compile Include="src/HTTP/Channel.fs" />
-      <Compile Include="src/HTTP/Api.fs" />
+      <Compile Include="src/HTTP/Client.fs" />
       <Compile Include="src/Program.fs" />
   </ItemGroup>
   <ItemGroup>
